@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+description: YFI Buybacks
+repository: https://github.com/yearn/thegraph-yfi-buyback
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: YfiBuyer
+    network: mainnet
+    source:
+      address: "0xdf5e4E54d212F7a01cf94B3986f40933fcfF589F"
+      abi: YfiBuyer
+      startBlock:	14782514
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - BuyBack
+      abis:
+        - name: YfiBuyer
+          file: ./abis/YfiBuyer.json
+      eventHandlers:
+        - event: Buyback(indexed address,uint256,uint256)
+          handler: handleBuyback
+      file: ./src/mapping.ts

@@ -59,8 +59,8 @@ jobs:
 
       - name: Build mainnet
         env:
-          NETWORK: mainnet
           GRAPH_PATH: yearn/yfi-buyback
         run: |
+          yarn
           yarn codegen
           yarn build
