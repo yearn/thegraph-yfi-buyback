@@ -8,3 +8,12 @@ type BuyBack @entity {
   dai: BigInt!
   yfi: BigInt!
 }
+
+type BuyBackContract @entity {
+  "Always 1."
+  id: ID!
+  admin: Bytes!
+  treasury: Bytes!
+
+  adminPending: Bytes
+}

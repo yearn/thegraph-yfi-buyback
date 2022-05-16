@@ -3,8 +3,11 @@ import {
 } from '../generated/schema'
 import {
   Buyback,
+  ProposeAdmin,
+  UpdateAdmin,
+  UpdateTreasury,
 } from '../generated/YfiBuyer/YfiBuyer'
-import { createId } from './utils'
+import { createId, getOrCreateBuybackContract } from './utils'
 
 
 export function handleBuyback(event: Buyback): void {
@@ -18,4 +21,26 @@ export function handleBuyback(event: Buyback): void {
   buyback.yfi= event.params.yfi
 
   buyback.save()
+}
+
+export function handleProposedAdmin(event: ProposeAdmin): void {
+  let contract = getOrCreateBuybackContract();
+
+  contract.adminPending = event.params.pending_admin;
+  contract.save();
+}
+
+export function handleUpdateAdmin(event: UpdateAdmin): void {
+  let contract = getOrCreateBuybackContract();
+  
+  contract.admin = event.params.admin;
+  contract.adminPending = null;
+  contract.save();
+}
+
+export function handleUpdateTreasury(event: UpdateTreasury): void {
+  let contract = getOrCreateBuybackContract();
+
+  contract.treasury = event.params.treasury;
+  contract.save();
 }
