@@ -1,0 +1,13 @@
+# First 10 buyback ordered by timestamp
+{
+  buyback(first: 10, orderBy: timestamp, orderDirection: desc) {
+    id
+    block
+    timestamp
+    seller
+    dai
+    yfi
+  }
+}
+
+

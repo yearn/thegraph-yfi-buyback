@@ -1,0 +1,10 @@
+type BuyBack @entity {
+  "Transaction hash-log index"
+  id: ID!
+  "Block number"
+  block: BigInt!
+  timestamp: BigInt!
+  seller: Bytes!
+  dai: BigInt!
+  yfi: BigInt!
+}
