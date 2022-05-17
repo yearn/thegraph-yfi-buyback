@@ -7,10 +7,12 @@ type BuyBack @entity {
   seller: Bytes!
   dai: BigInt!
   yfi: BigInt!
+
+  daiRemaining: BigInt!
 }
 
 type Admin @entity {
-  "Always 1."
+  "The tx hash when admin was set"
   id: ID!
 
   "Current admin address"
@@ -19,12 +21,10 @@ type Admin @entity {
   block: BigInt!
   "Timestamp admin was last set"
   timestamp: BigInt!
-  "Hash of txn where admin was last set"
-  hash: Bytes!
 }
 
 type Treasury @entity {
-  "Always 1."
+  "The tx hash when treasury was set"
   id: ID!
 
   "Current treasury address"
@@ -33,6 +33,4 @@ type Treasury @entity {
   block: BigInt!
   "Timestamp treasury was last set"
   timestamp: BigInt!
-  "Hash of txn where treasury was last set"
-  hash: Bytes!
 }
