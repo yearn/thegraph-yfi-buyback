@@ -13,14 +13,24 @@ dataSources:
       startBlock:	14782514
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - BuyBack
+        - Admin
+        - Treasury
       abis:
         - name: YfiBuyer
           file: ./abis/YfiBuyer.json
+        - name: Dai
+          file: ./abis/Dai.json
       eventHandlers:
         - event: Buyback(indexed address,uint256,uint256)
           handler: handleBuyback
+        - event: ProposeAdmin(indexed address)
+          handler: handleProposedAdmin
+        - event: UpdateAdmin(indexed address)
+          handler: handleUpdateAdmin
+        - event: UpdateTreasury(indexed address)
+          handler: handleUpdateTreasury
       file: ./src/mapping.ts
