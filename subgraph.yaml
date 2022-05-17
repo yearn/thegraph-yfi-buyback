@@ -17,7 +17,8 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - BuyBack
-        - BuyBackContract
+        - Admin
+        - Treasury
       abis:
         - name: YfiBuyer
           file: ./abis/YfiBuyer.json

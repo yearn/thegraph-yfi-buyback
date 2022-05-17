@@ -9,11 +9,30 @@ type BuyBack @entity {
   yfi: BigInt!
 }
 
-type BuyBackContract @entity {
+type Admin @entity {
   "Always 1."
   id: ID!
-  admin: Bytes!
-  treasury: Bytes!
 
-  adminPending: Bytes
+  "Current admin address"
+  address: Bytes!
+  "Block height admin was last set"
+  block: BigInt!
+  "Timestamp admin was last set"
+  timestamp: BigInt!
+  "Hash of txn where admin was last set"
+  hash: Bytes!
+}
+
+type Treasury @entity {
+  "Always 1."
+  id: ID!
+
+  "Current treasury address"
+  address: Bytes!
+  "Block height treasury was last set"
+  block: BigInt!
+  "Timestamp treasury was last set"
+  timestamp: BigInt!
+  "Hash of txn where treasury was last set"
+  hash: Bytes!
 }

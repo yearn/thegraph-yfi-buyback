@@ -1,5 +1,7 @@
 import {
   BuyBack,
+  Admin,
+  Treasury
 } from '../generated/schema'
 import {
   Buyback,
@@ -7,7 +9,7 @@ import {
   UpdateAdmin,
   UpdateTreasury,
 } from '../generated/YfiBuyer/YfiBuyer'
-import { createId, getOrCreateBuybackContract } from './utils'
+import { createId } from './utils'
 
 
 export function handleBuyback(event: Buyback): void {
@@ -24,23 +26,31 @@ export function handleBuyback(event: Buyback): void {
 }
 
 export function handleProposedAdmin(event: ProposeAdmin): void {
-  let contract = getOrCreateBuybackContract();
-
-  contract.adminPending = event.params.pending_admin;
-  contract.save();
+  /* null op */
 }
 
 export function handleUpdateAdmin(event: UpdateAdmin): void {
-  let contract = getOrCreateBuybackContract();
-  
-  contract.admin = event.params.admin;
-  contract.adminPending = null;
-  contract.save();
+  let adminEntity = Admin.load("1");
+  if(!adminEntity) {
+    adminEntity = new Admin("1");
+  }
+
+  adminEntity.address = event.params.admin;
+  adminEntity.block = event.block.number;
+  adminEntity.timestamp = event.block.timestamp;
+  adminEntity.hash = event.transaction.hash;
+  adminEntity.save();
 }
 
 export function handleUpdateTreasury(event: UpdateTreasury): void {
-  let contract = getOrCreateBuybackContract();
+  let treasuryEntity = Treasury.load("1");
+  if(!treasuryEntity) {
+    treasuryEntity = new Treasury("1");
+  }
 
-  contract.treasury = event.params.treasury;
-  contract.save();
+  treasuryEntity.address = event.params.treasury;
+  treasuryEntity.block = event.block.number;
+  treasuryEntity.timestamp = event.block.timestamp;
+  treasuryEntity.hash = event.transaction.hash;
+  treasuryEntity.save();
 }
