@@ -1,5 +1,5 @@
 import { BuyBack } from '../generated/schema'
-import { Buyback } from '../generated/YfiBuyer/YfiBuyer'
+import { Buyback } from '../generated/YfiBuyerV1/YfiBuyer'
 import { createId } from './utils'
 
 export function handleBuyback(event: Buyback): void {
@@ -11,6 +11,7 @@ export function handleBuyback(event: Buyback): void {
   buyback.seller = event.params.buyer
   buyback.dai = event.params.dai
   buyback.yfi = event.params.yfi
+  buyback.contract = event.address
 
   buyback.save()
 }
