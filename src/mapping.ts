@@ -1,11 +1,6 @@
-import {
-  BuyBack,
-} from '../generated/schema'
-import {
-  Buyback,
-} from '../generated/YfiBuyer/YfiBuyer'
+import { BuyBack } from '../generated/schema'
+import { Buyback } from '../generated/YfiBuyerV1/YfiBuyer'
 import { createId } from './utils'
-
 
 export function handleBuyback(event: Buyback): void {
   let id = createId(event.logIndex, event.transaction.hash)
@@ -14,8 +9,9 @@ export function handleBuyback(event: Buyback): void {
   buyback.block = event.block.number
   buyback.timestamp = event.block.timestamp
   buyback.seller = event.params.buyer
-  buyback.dai= event.params.dai
-  buyback.yfi= event.params.yfi
+  buyback.dai = event.params.dai
+  buyback.yfi = event.params.yfi
+  buyback.contract = event.address
 
   buyback.save()
 }

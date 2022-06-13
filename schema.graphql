@@ -7,4 +7,6 @@ type BuyBack @entity {
   seller: Bytes!
   dai: BigInt!
   yfi: BigInt!
+  "Buyback contract address"
+  contract: Bytes!
 }
